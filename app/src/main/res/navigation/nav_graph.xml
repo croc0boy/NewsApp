@@ -9,5 +9,18 @@
         android:id="@+id/mainPage"
         android:name="uz.direction.news.MainPage"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" />
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPage_to_newsContent"
+            app:destination="@id/newsContent" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsContent"
+        android:name="uz.direction.news.NewsContent"
+        android:label="fragment_news_content"
+        tools:layout="@layout/fragment_news_content" >
+        <action
+            android:id="@+id/action_newsContent_to_mainPage"
+            app:destination="@id/mainPage" />
+    </fragment>
 </navigation>
