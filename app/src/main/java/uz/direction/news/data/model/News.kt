@@ -7,7 +7,7 @@ import java.sql.ClientInfoStatus
 
 data class News(
     @SerializedName("articles")
-    val articles: List<Article>,
+    val articles: ArrayList<Article>,
     @SerializedName("status")
     val status: String,
     @SerializedName("totalResults")

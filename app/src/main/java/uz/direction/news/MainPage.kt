@@ -1,16 +1,15 @@
 package uz.direction.news
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import uz.direction.news.data.network.RetrofitService
 import uz.direction.news.data.repository.NewsRepository
-import uz.direction.news.databinding.ActivityMainBinding
 import uz.direction.news.databinding.FragmentMainPageBinding
-
+import uz.direction.news.recycleView.NewsAdapter
 
 class MainPage : Fragment(R.layout.fragment_main_page) {
 
@@ -23,10 +22,12 @@ class MainPage : Fragment(R.layout.fragment_main_page) {
         repository.getNews()
 
         repository.newsLiveData.observe(viewLifecycleOwner) { news ->
-            binding?.newsContent?.text = news.articles[2].content
-            Log.d("TAG", news.articles[2].author )
+            val newsAdapter = NewsAdapter(news.articles)
+            binding?.rvNews?.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                adapter = newsAdapter
+            }
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -26,15 +26,16 @@ class NewsAdapter(
         private val newsTitle = itemView.findViewById<TextView>(R.id.news_title)
         private val newsAuthor = itemView.findViewById<TextView>(R.id.news_author)
         private val newsDate = itemView.findViewById<TextView>(R.id.news_date)
-
+        private val newsDescription = itemView.findViewById<TextView>(R.id.news_description)
         fun onBind(
             article: Article,
             position: Int,
             onClick: (Article, Int) -> Unit
         ) {
-            newsAuthor.text = article.author
             newsTitle.text = article.title
-            newsDate.text = article.title
+            newsAuthor.text = article.author
+            newsDate.text = article.publishedAt.subSequence(0,10)
+            newsDescription.text = article.description
             Glide.with(itemView.context).load(article.urlToImage).into(newsImage)
             itemView.setOnClickListener {
                 onClick.invoke(article, position)
