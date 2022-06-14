@@ -8,41 +8,36 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.direction.news.data.network.RetrofitService
 import uz.direction.news.data.repository.NewsRepository
-import uz.direction.news.databinding.FragmentMainPageBinding
-import uz.direction.news.recycleView.NewsAdapter
+import uz.direction.news.databinding.FragmentNewsPageBinding
+import uz.direction.news.Adapter.NewsAdapter
+import uz.direction.news.data.repository.CountriesName
 
-class MainPage : Fragment(R.layout.fragment_main_page) {
+class News : Fragment(R.layout.fragment_news_page) {
 
-    private var binding: FragmentMainPageBinding? = null
+    private var binding: FragmentNewsPageBinding? = null
     private val repository = NewsRepository(RetrofitService.newsService)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        repository.getNews()
+        if (savedInstanceState == null)
+            repository.getNews(CountriesName.US)
 
         repository.newsLiveData.observe(viewLifecycleOwner) { news ->
             val newsAdapter = NewsAdapter(news.articles)
             binding?.rvNews?.apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = newsAdapter
             }
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentMainPageBinding.inflate(layoutInflater)
+        binding = FragmentNewsPageBinding.inflate(layoutInflater)
         return binding!!.root
-
     }
 
     override fun onDestroy() {

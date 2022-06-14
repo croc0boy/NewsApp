@@ -1,4 +1,4 @@
-package uz.direction.news.recycleView
+package uz.direction.news.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -34,15 +34,20 @@ class NewsAdapter(
         ) {
             newsTitle.text = article.title
             newsAuthor.text = article.author
-            newsDate.text = article.publishedAt.subSequence(0,10)
+            newsDate.text = article.publishedAt.subSequence(0, 10)
             newsDescription.text = article.description
-            Glide.with(itemView.context).load(article.urlToImage).into(newsImage)
+            Glide
+                .with(itemView.context)
+                .load(article.urlToImage)
+                .placeholder(R.drawable.img)
+                .into(newsImage)
             itemView.setOnClickListener {
                 onClick.invoke(article, position)
             }
         }
 
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleVH {
         val view =

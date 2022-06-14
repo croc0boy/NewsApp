@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/mainPage"
-        android:name="uz.direction.news.MainPage"
+        android:name="uz.direction.news.News"
         android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" >
+        tools:layout="@layout/fragment_news_page" >
         <action
             android:id="@+id/action_mainPage_to_newsContent"
             app:destination="@id/newsContent" />
@@ -22,5 +22,8 @@
         <action
             android:id="@+id/action_newsContent_to_mainPage"
             app:destination="@id/mainPage" />
+        <argument
+            android:name="article"
+            app:argType="uz.direction.news.data.model.Article" />
     </fragment>
 </navigation>

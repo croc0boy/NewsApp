@@ -11,13 +11,12 @@ import uz.direction.news.data.network.news.NewsService
 class NewsRepository(
     private val newsService: NewsService
 ) {
-
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
     val newsLiveData : MutableLiveData<News> = MutableLiveData()
 
-    fun getNews() {
+    fun getNews(country: CountriesName) {
         coroutineScope.launch {
-            val newsResponse = newsService.getRandomNews("us")
+            val newsResponse = newsService.getRandomNews(country.toString())
             if(newsResponse.isSuccessful){
                 newsLiveData.postValue(newsResponse.body())
             }
