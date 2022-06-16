@@ -19,11 +19,8 @@
         android:name="uz.direction.news.NewsContent"
         android:label="fragment_news_content"
         tools:layout="@layout/fragment_news_content" >
-        <action
-            android:id="@+id/action_newsContent_to_mainPage"
-            app:destination="@id/mainPage" />
         <argument
-            android:name="article"
+            android:name="newsArticle"
             app:argType="uz.direction.news.data.model.Article" />
     </fragment>
 </navigation>
